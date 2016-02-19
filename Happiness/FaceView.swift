@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol FaceViewDataSource: class {
+    func smilinessForFaceView(sender: FaceView) -> Double?
+}
+
+@IBDesignable
 class FaceView: UIView {
-    
+    @IBInspectable
     var lineWidth: CGFloat = 3 { didSet { setNeedsDisplay() } }
-    
+    @IBInspectable
     var color: UIColor = UIColor.blueColor(){ didSet { setNeedsDisplay() } }
-    
+    @IBInspectable
     var scale: CGFloat = 0.90 { didSet { setNeedsDisplay() } }
     
     var faceCenter: CGPoint {
@@ -23,6 +28,8 @@ class FaceView: UIView {
     var faceRadius: CGFloat {
         return min(bounds.size.width, bounds.size.height) / 2 * scale
     }
+    
+    weak var dataSource: FaceViewDataSource?
     
     private struct Scaling {
         static let FaceRadiusToEyeRadiusRatio: CGFloat = 10
@@ -64,7 +71,7 @@ class FaceView: UIView {
         let start = CGPoint(x: faceCenter.x - mouthWidth / 2, y: faceCenter.y + mouthVerticalOffset)
         let end = CGPoint(x: start.x + mouthWidth, y: start.y)
         let cp1 = CGPoint(x: start.x + mouthWidth / 3, y: start.y + smileHeight)
-        let cp2 = CGPoint(x: end.x - mouthWidth / 3, y: cp1.y)
+        let cp2 = CGPoint(x: end.x - mouthWidth / 3 , y: cp1.y)
         
         let path = UIBezierPath()
         path.moveToPoint(start)
@@ -84,7 +91,7 @@ class FaceView: UIView {
         bezierPathForEye(.Left).stroke()
         bezierPathForEye(.Right).stroke()
         
-        let smiliness = 0.75
+        let smiliness = dataSource?.smilinessForFaceView(self) ?? 0.0
         let smilePath = bezierPathForSmile(smiliness)
         smilePath.stroke()
     }

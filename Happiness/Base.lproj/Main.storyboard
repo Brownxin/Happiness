@@ -20,6 +20,17 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="9iQ-90-sZx" customClass="FaceView" customModule="Happiness" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.99239474534988403" green="0.5945630669593811" blue="0.020988713949918747" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="scale">
+                                        <real key="value" value="0.94999999999999996"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,10 +41,13 @@
                             <constraint firstItem="9iQ-90-sZx" firstAttribute="leading" secondItem="nMu-y4-g4c" secondAttribute="leading" id="VmE-9F-W6Q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="faceView" destination="9iQ-90-sZx" id="qiI-LV-hfc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGA-5U-uDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366" y="168"/>
+            <point key="canvasLocation" x="402" y="169"/>
         </scene>
     </scenes>
 </document>
